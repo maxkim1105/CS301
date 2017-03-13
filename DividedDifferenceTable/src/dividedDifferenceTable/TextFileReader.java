@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 public class TextFileReader {
 
-	List<Float> x; // x values
-	List<Float> y; // f(x)
+	public List<Float> x; // x values
+	public List<Float> y; // f(x)
 
 	public TextFileReader() throws FileNotFoundException, IOException {
 		x = saveX();
@@ -66,10 +66,18 @@ public class TextFileReader {
 			System.out.println(s);
 		}
 	}
-	
+
 	public void printY() {
 		for (Float s : y) {
 			System.out.println(s);
 		}
+	}
+
+	public float[] convertToArr(List<Float> list) {
+		float ar[] = new float[list.size()];
+		for (int i = 0; i < list.size(); i++) {
+			ar[i] = list.get(i);
+		}
+		return ar;
 	}
 }
