@@ -21,12 +21,16 @@ public class DividedDifferenceTable {
 		TextFileReader fileReader = new TextFileReader();
 		float[] x = fileReader.convertToArr(fileReader.x); // x
 		float[] y = fileReader.convertToArr(fileReader.y); // f(x)
+		if(x.length > 40) {
+			System.out.println("data needs to contain x values less than 40");
+			System.exit(0);
+		}
 		// first entry in each column in the divided-difference table
-		// f[x0], f[x0,x1], f[x0,x1,x2],,,
-		float[] ddtFirst = getFirstEntry(x, y); // divided difference tale
-		// printArray(ddtFirst);
+		float[] ddtFirst = getFirstEntry(x, y);
+		// divided difference table
 		float[][] ddt = makeDDT(x, y);
 		printDDT(x, ddt);
+		printInterpolation(x, ddtFirst);
 	}
 
 	public static void printArray(float[] a) {
@@ -75,6 +79,7 @@ public class DividedDifferenceTable {
 	public static void printDDT(float[] x, float[][] ddt) {
 		float[][] ddtCopy = ddt.clone();
 
+		System.out.println("Divided Difference Table is: ");
 		// print top of the table.
 		// x, f[], f[ , ], f[ , , ],,,
 		System.out.print("x(i)\t");
@@ -87,10 +92,34 @@ public class DividedDifferenceTable {
 		for (int i = 0; i < ddtCopy[0].length - 1; i++) {
 			System.out.print(x[i] + "\t");
 			for (int j = 0; j < ddtCopy[0].length - 1 - i; j++) {
-				System.out.printf("%.2f\t" ,ddtCopy[j][i]);
+				System.out.printf("%.2f\t", ddtCopy[j][i]);
 			}
 			System.out.println();
 		}
+	}
+
+	public static void printInterpolation(float[] x, float[] ddtFirst) {
+		float[] xs = x.clone();
+		float[] ddt = ddtFirst.clone();
+		// (x-x0),(x-x0)(x-x1),,,
+		String[] xInterpol = new String[xs.length];
+		for (int i = 0; i < xInterpol.length - 1; i++) {
+			xInterpol[i] = "(x-" + xs[i] + ")";
+			if (i >= 1) {
+				xInterpol[i] = xInterpol[i - 1] + xInterpol[i];
+			}
+		}
+
+		// print the interpolation
+		System.out.println("Interpolation polynomial is:  ");
+		System.out.print(xs[0] + " + ");
+		for (int i = 0; i < xs.length-1; i++) {
+			System.out.print(xs[i + 1] + xInterpol[i]);
+			if(i < xs.length-2) {
+				System.out.print(" + ");
+			}
+		}
+
 	}
 
 }
