@@ -24,11 +24,9 @@ public class DividedDifferenceTable {
 		// first entry in each column in the divided-difference table
 		// f[x0], f[x0,x1], f[x0,x1,x2],,,
 		float[] ddtFirst = getFirstEntry(x, y); // divided difference tale
-		// printArray(x);
-		// printArray(y);
 		// printArray(ddtFirst);
 		float[][] ddt = makeDDT(x, y);
-		printDDT(x,ddt);
+		printDDT(x, ddt);
 	}
 
 	public static void printArray(float[] a) {
@@ -57,13 +55,12 @@ public class DividedDifferenceTable {
 		float[] x = xvalues.clone();
 		float[] fx = yvalues.clone();
 		int n = x.length;
-		float[][] ddt = new float[n][n+1];
-		System.out.println("n: " + n);
-		for(int i = 0; i < n; i++) {
+		float[][] ddt = new float[n][n + 1];
+		// System.out.println("n: " + n);
+		for (int i = 0; i < n; i++) {
 			ddt[0][i] = fx[i];
-			System.out.println(ddt[0][i]);
+			// System.out.println(ddt[0][i]);
 		}
-		
 		int k = 0;
 		for (int i = 1; i < n; i++) {
 			k = i;
@@ -77,46 +74,23 @@ public class DividedDifferenceTable {
 
 	public static void printDDT(float[] x, float[][] ddt) {
 		float[][] ddtCopy = ddt.clone();
-		System.out.println("this: " + ddt[0].length);
-		/*
-		System.out.println(ddtCopy[0][0]);
-		System.out.println(ddtCopy[0][1]);
-		System.out.println(ddtCopy[0][2]);
-		System.out.println(ddtCopy[0][3]);
-		System.out.println(ddtCopy[0][4]);
 
+		// print top of the table.
+		// x, f[], f[ , ], f[ , , ],,,
+		System.out.print("x(i)\t");
+		for (int i = 0; i < ddt[0].length - 1; i++) {
+			System.out.print("y" + i + "(i)\t");
+		}
+		System.out.println(" ");
 
-		System.out.println(ddtCopy[1][0]);
-		System.out.println(ddtCopy[1][1]);
-		System.out.println(ddtCopy[1][2]);
-		System.out.println(ddtCopy[1][3]);
-		System.out.println(ddtCopy[1][4]);
-
-
-		System.out.println(ddtCopy[2][0]);
-		System.out.println(ddtCopy[2][1]);
-		System.out.println(ddtCopy[2][2]);
-		System.out.println(ddtCopy[2][3]);
-		System.out.println(ddtCopy[2][4]);
-
-
-		System.out.println(ddtCopy[3][0]);
-		System.out.println(ddtCopy[3][1]);
-		System.out.println(ddtCopy[3][2]);
-		System.out.println(ddtCopy[3][3]);
-		System.out.println(ddtCopy[3][4]);
-	    */
-
-		System.out.println("Begein");
-		for (int i = 0; i < ddtCopy[0].length-1; i++) {
-			System.out.print(x[i]);
-			for (int j = 0; j < ddtCopy[0].length-1; j++) {
-				System.out.print("  ");
-				System.out.print(ddtCopy[j][i]);
+		// print the table
+		for (int i = 0; i < ddtCopy[0].length - 1; i++) {
+			System.out.print(x[i] + "\t");
+			for (int j = 0; j < ddtCopy[0].length - 1 - i; j++) {
+				System.out.printf("%.2f\t" ,ddtCopy[j][i]);
 			}
 			System.out.println();
 		}
-
 	}
 
 }
