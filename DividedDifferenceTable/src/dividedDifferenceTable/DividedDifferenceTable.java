@@ -112,9 +112,12 @@ public class DividedDifferenceTable {
 
 		// print the interpolation
 		System.out.println("Interpolation polynomial is:  ");
-		System.out.print(xs[0] + " + ");
+		System.out.print(ddt[0] + " + ");
 		for (int i = 0; i < xs.length-1; i++) {
-			System.out.print(xs[i + 1] + xInterpol[i]);
+			System.out.printf("%.3f%s",ddt[i + 1],xInterpol[i]);
+			//System.out.printf("%.3f", ddt[i + 1]);
+			//System.out.printf("%s", xInterpol[i]);
+			//System.out.print(ddt[i + 1] + xInterpol[i]);
 			if(i < xs.length-2) {
 				System.out.print(" + ");
 			}
